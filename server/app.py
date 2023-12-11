@@ -1,7 +1,9 @@
 import os
+import time
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+
 
 #global variables
 currUsers = []
@@ -26,15 +28,20 @@ def userJoin():
     print(name)
     return jsonify(name)
 
+#Socket.io
 @socketio.on('send_message')
-def send_message(message):
-    print(message)
+def send_message(data):
+    
+    print(data)
+    emit('send_message', data)
 
 @socketio.on('send_username')
 def send_username(user):
     currUsers.append(user)
     print(user)
     emit('send_username', {"username" : user})
+
+# @socketio.on('')
 
 @socketio.on('disconnect')
 def test_disconnect():
