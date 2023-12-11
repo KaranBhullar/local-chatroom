@@ -28,11 +28,12 @@ class db:
 
         table_info = '''
         CREATE TABLE IF NOT EXISTS chat_data (
-            id SERIAL PRIMARY KEY,
-            data VARCHAR(500) NOT NULL
+            username VARCHAR(255) NOT NULL,
+            timestamp BIGINT,
+            message VARCHAR(300) NOT NULL
         )
         '''
         self.cursor.execute(table_info)
 
     def insert(self, message_data):
-        self.cursor.execute("INSERT INTO chat_data (data) VALUES (%s)", [message_data])
+        self.cursor.execute("INSERT INTO chat_data (username, timestamp, message) VALUES (%s, %s, %s)", (message_data['username'], message_data['timestamp'], message_data['message']))
