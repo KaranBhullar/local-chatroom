@@ -12,7 +12,6 @@ const UsernameModal: React.FC<UsernameModalProps> = ({ isOpen, onClose, onSave, 
   if (!isOpen) return null;
   const handleSave = () => {
     onSave(username);
-    setUsername("");
     onClose();
   };
 
